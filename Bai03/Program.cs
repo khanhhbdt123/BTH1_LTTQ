@@ -1,0 +1,61 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace Bai03
+{
+    class Program
+    {
+        static bool ktNamNhuan(int nam)
+        {
+            return (nam % 400 == 0 || nam % 4 == 0 && nam % 100 != 0); 
+        }
+        static bool ktHopLe(int ngay, int thang, int nam)
+        {
+            if (nam < 1) return false;
+            if (thang < 1 || thang > 12) return false;
+            int[] SoNgayTrongThang = { 31, (ktNamNhuan(nam) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+            if (ngay < 1 || ngay > SoNgayTrongThang[thang - 1]) return false;
+            return true;
+        }
+        static void Main(string[] args)
+        { 
+            Console.Write("Nhap ngay: ");
+            int ngay = int.Parse(Console.ReadLine());
+            Console.Write("Nhap thang: ");
+            int thang = int.Parse(Console.ReadLine());
+            Console.Write("Nhap nam: ");
+            int nam = int.Parse(Console.ReadLine());
+            int choice;
+            do
+            {
+                Console.WriteLine("\n====MENU====\n ");
+                Console.WriteLine("1. Kiem tra ngay thang nam co hop le hay khong.");
+                Console.WriteLine("0. Thoat chuong trinh.");
+                Console.WriteLine("Nhap lua chon: ");
+                choice = int.Parse(Console.ReadLine());
+                switch(choice)
+                {
+                    case 1:
+                        if (ktHopLe(ngay, thang, nam))
+                        {
+                            Console.WriteLine("Ngay "+ ngay+ " thang "+ thang+ " nam "+ nam+ " hop le.");                
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ngay "+ ngay+ " thang "+ thang+ " nam "+ nam+ " khong hop le.");
+                        }
+                        break;
+                    case 0:
+                                Console.WriteLine("Thoat chuong trinh.");
+                                break;
+                            default:
+                                Console.WriteLine("Lua chon khong hop le.");
+                                break;
+                            }    
+            }
+            while (choice != 0);
+        }
+    }
+}
